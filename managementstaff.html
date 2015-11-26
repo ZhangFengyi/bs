@@ -9,12 +9,53 @@
 
     
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <style>
-      body {
-            padding-top: 70px;
-            color: #5a5a5a;
-        }
+		body {
+			padding-top: 70px;
+			color: #5a5a5a;
+		}
     </style>
+    <script>
+		$(function () {
+			//搜索输入框的过滤功能
+			$("#filterName").keyup(function () {
+				$("table tbody tr").hide()
+				.filter(":contains('"+( $(this).val() )+"')").show();	
+			});
+			//实现禁用按钮功能（有bug待修复）
+			var flag = true;
+			$("table tbody tr a").click(function () {
+				flag = !flag;
+				console.log(flag);
+				if (flag == false) {
+					$(this).parent().parent().addClass("danger");	
+				} else {
+					$(this).parent().parent().removeClass("danger");		
+				}
+			});
+			//实现添加员工按钮功能
+			$("#button-add").click(function () {
+				//$("#name").val();
+				//$("#department").val();
+				//$("#position").val();
+				//$("#number").val();
+				var addstaff = "<tr><td>6</td><td>"
+				+ $("#name").val() 
+				+"</td><td>"
+				+( $("#department").val() )
+				+"</td><td>"
+				+( $("#position").val() )
+				+"</td><td>"
+				+( $("#number").val() )
+				+"</td><td><a href='#' class='btn btn-default'>禁用/启用</a></td></tr>";
+				console.log(addstaff);
+				$(addstaff).appendTo("table tbody");
+				//$("form tbody").append($addstaff);
+			});
+		});
+	</script>
     
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
@@ -79,9 +120,8 @@
 
           <form class="navbar-form navbar-right" role="search">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
+              <input type="text" id="filterName" class="form-control" placeholder="搜索">
             </div>
-            <button type="submit" class="btn btn-default">搜索</button>
           </form>
         </div><!-- /.navbar-collapse -->
         </nav>
@@ -98,32 +138,32 @@
                 <form class="form-horizontal">
                 <div class="form-group">
                   <label for="name" class="col-md-3 control-label">姓名</label>
-                  <div class="col-md-6">
-                    <input type="email" class="form-control" id="name" placeholder="">
+                  <div class="col-md-7">
+                    <input type="text" class="form-control" id="name" placeholder="">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="department" class="col-md-3 control-label">部门</label>
-                  <div class="col-md-6">
-                    <input type="password" class="form-control" id="department" placeholder="">
+                  <div class="col-md-7">
+                    <input type="text" class="form-control" id="department" placeholder="">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="post" class="col-md-3 control-label">职务</label>
-                  <div class="col-md-6">
-                    <input type="email" class="form-control" id="post" placeholder="">
+                  <div class="col-md-7">
+                    <input type="text" class="form-control" id="position" placeholder="">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="number" class="col-md-3 control-label">编号</label>
-                  <div class="col-md-6">
-                    <input type="password" class="form-control" id="number" placeholder="">
+                  <div class="col-md-7">
+                    <input type="text" class="form-control" id="number" placeholder="">
                   </div>
                 </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                  <button type="button" class="btn btn-primary">提交</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                  <button type="button" id="button-add" class="btn btn-default">添加</button>
                 </div>
                 </form>
             </div>
@@ -145,65 +185,56 @@
             <tbody>
               <tr>
                 <td>1</td>
-                <td>张峰毅</td>
+                <td>关羽</td>
                 <td>产品研发部</td>
                 <td>实习生</td>
-                <td>150570</td>
+                <td>150571</td>
                 <td>
-                  <button type="button" class="btn btn-primary">禁用</button>
-                  <button type="button" class="btn btn-success">启用</button>
+                  <a href="#" class="btn btn-default">禁用/启用</a>
                 </td>
               </tr>
               <tr>
                 <td>2</td>
-                <td>张峰毅</td>
+                <td>张飞</td>
                 <td>产品研发部</td>
                 <td>实习生</td>
-                <td>150570</td>
+                <td>150572</td>
                 <td>
-                  <button type="button" class="btn btn-primary">禁用</button>
-                  <button type="button" class="btn btn-success">启用</button>
+                  <a href="#" class="btn btn-default">禁用/启用</a>
                 </td>
               </tr>
               <tr>
                 <td>3</td>
-                <td>张峰毅</td>
+                <td>赵云</td>
                 <td>产品研发部</td>
                 <td>实习生</td>
-                <td>150570</td>
+                <td>150573</td>
                 <td>
-                  <button type="button" class="btn btn-primary">禁用</button>
-                  <button type="button" class="btn btn-success">启用</button>
+                 <a href="#" class="btn btn-default">禁用/启用</a>
                 </td>
               </tr>
               <tr>
                 <td>4</td>
-                <td>张峰毅</td>
+                <td>马超</td>
                 <td>产品研发部</td>
                 <td>实习生</td>
-                <td>150570</td>
+                <td>150574</td>
                 <td>
-                  <button type="button" class="btn btn-primary">禁用</button>
-                  <button type="button" class="btn btn-success">启用</button>
+                  <a href="#" class="btn btn-default">禁用/启用</a>
                 </td>
               </tr>
               <tr>
                 <td>5</td>
-                <td>张峰毅</td>
+                <td>黄忠</td>
                 <td>产品研发部</td>
                 <td>实习生</td>
-                <td>150570</td>
+                <td>150575</td>
                 <td>
-                  <button type="button" class="btn btn-primary">禁用</button>
-                  <button type="button" class="btn btn-success">启用</button>
+                  <a href="#" class="btn btn-default">禁用/启用</a>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-
-    
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
